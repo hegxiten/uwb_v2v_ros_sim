@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<robot name="r32" xmlns:xacro="http://ros.org/wiki/xacro">
+    <xacro:arg name="laser_visual" default="false"/>
+    <xacro:arg name="imu_visual" default="false"/>
+
+    <gazebo reference="base_link"/>
+
+    <gazebo reference="uwb_slave_A">
+        <material>Gazebo/Blue</material>
+    </gazebo>
+    <gazebo reference="uwb_slave_B">
+        <material>Gazebo/Blue</material>
+    </gazebo>
+    <gazebo reference="uwb_master_A">
+        <material>Gazebo/Red</material>
+    </gazebo>
+    <gazebo reference="uwb_master_B">
+        <material>Gazebo/Red</material>
+    </gazebo>
+
+    <gazebo>
+        <plugin name="r32_controller" filename="libgazebo_ros_planar_move.so">
+            <commandTopic>cmd_vel</commandTopic>
+            <odometryTopic>odom</odometryTopic>
+            <odometryFrame>odom</odometryFrame>
+            <odometryRate>20.0</odometryRate>
+            <robotBaseFrame>base_footprint</robotBaseFrame>
+        </plugin>
+    </gazebo>
+
+</robot>

@@ -1,0 +1,27 @@
+
+material UrbanTile/Undercarriage_Diffuse
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture Undercarriage_Albedo.png
+        }
+      }
+    }
+  }
+material UrbanTile/Body_Diffuse
+{
+  technique
+  {
+    pass
+    {
+      texture_unit
+      {
+        texture R32_Albedo.png
+        }
+      }
+    }
+  }

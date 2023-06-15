@@ -1,0 +1,36 @@
+<launch>
+    <param name="/use_sim_time" value="true"/>
+    <node name="set_physics" pkg="uwb_v2v_ros_sim" type="set_physics.py" output="screen" />
+
+    <arg name="movement_direction" default="1" />
+    <arg name="speed" default="1" />
+    <arg name="kill_on_end" default="1" />
+    <arg name="bag_file_path" default="/tmp/default.bag" />
+    <arg name="topics" default="/clock " />
+
+    <node pkg="rosbag" type="record" name="record" args="-O $(arg bag_file_path) $(arg topics)" />
+
+    <!-- Start gazebo with an empty world -->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="world_name" value="$(find turtlebot3_gazebo)/worlds/empty.world"/>
+        <arg name="paused" value="false"/>
+        <arg name="use_sim_time" value="true"/>
+        <arg name="gui" value="true"/>
+        <arg name="headless" value="false"/>
+        <arg name="debug" value="false"/>
+    </include>
+
+    <!-- Spawn multiple robots -->
+    <node name="multi_robot_spawner" pkg="uwb_v2v_ros_sim" type="multi_robot_spawner.py" output="screen">
+        <param name="robot_num" value="$(arg robot_num)" />  <!-- change this value to spawn a different number of robots -->
+        <param name="robot_spacing" value="$(arg robot_spacing)" />
+        <param name="max_range" value="$(arg max_range)" />
+    </node>
+
+    <node name="move_robot" pkg="uwb_v2v_ros_sim" type="move_robot.py" output="screen">
+        <param name="movement_direction" value="$(arg movement_direction)" />
+        <param name="speed" value="$(arg speed)" />
+        <param name="kill_on_end" value="$(arg kill_on_end)" />
+    </node>
+
+</launch>
