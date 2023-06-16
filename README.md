@@ -2,16 +2,16 @@
 This package is to simulate the self-propelled rail vehicle V2V ranging functionalities based on Decawave DWM1001-DEV in ROS environment. For each vehicle (designated as `robot{}`), generated V2V ranging map is published as JSON into `/robot{}/robot_dist` topic. 
 
 ![](https://raw.githubusercontent.com/hegxiten/uwb_v2v_ros_sim/master/docs/1.png)
-![](https://raw.githubusercontent.com/hegxiten/uwb_v2v_ros_sim/master/docs/2.png)
+![](https://raw.githubusercontent.com/hegxiten/uwb_v2v_ros_sim/master/docs/3.png)
 
-## Positions of the UWB Anchors(Slaves) and Tags(Masters)
+## Positions of the UWB anchors (slaves) and tags (masters)
 
 The position of the individual UWB nodes are defined as the "Informative Position" (details can be found at the submitted manuscript **Development and Testing of A UWB-based Vehicle-toVehicle (V2V) Ranging System for Self-Propelled Rail
 Vehicles** submitted to *IEEE Transactions on Vehicular Technology*)
 
 To define the informative positions of individual UWB nodes, change the `joint_origin` argument for each `xacro:uwb_link` in `rail_vehicle_description/model.urdf.xacro`.
 
-## Platform and Environment
+## Platform and environments
 `lsb_release -a` outputs:
 ```
 Distributor ID: Ubuntu
@@ -67,15 +67,15 @@ There are two ways to launch the simulation: 1. from the rosnode command line, 2
    
    The simulation arguments (such as approach speeds) must be passed directly into the commands like above. Launching from the launch file is useful for one-time testing.
 
-## Published Topic
+## Published topics
 
 `rostopic echo /robot{idx}/robot_dist` can give you direct outputs for each vehicle (robot) identified by their index `idx`. 
 
-## Message Type
+## Message types
 
 Currently, there is no custom message type defined. The message type is `std_msgs/String` and the message content is a JSON string. The JSON string can be parsed into a JSON object in Python.
 
-## Probability Model and Stale Threshold 
+## Probability model and stale threshold 
 
 The pack loss probability model is defined as a function of the distance between the two vehicles that can be modified in `src/utils/utils.py`
 
@@ -83,5 +83,14 @@ The stale threshold (in seconds) for networking can be modified in `src/constant
 
 ## Outputs:
 
-When launched, you are expecting the 
-![](https://raw.githubusercontent.com/hegxiten/uwb_v2v_ros_sim/master/docs/3.png)
+When launched, you are expecting the following results: 
+![](https://raw.githubusercontent.com/hegxiten/uwb_v2v_ros_sim/master/docs/2.png)
+
+## Terminologies
+
+In the interest of fostering an open and welcoming environment, we would like to clarify some terminology used within our codebase and documentation.
+
+This project uses the conventional terms `master` and `slave` to denote primary and secondary UWB nodes respectively. These terms are employed due to their widespread use and understanding in the tech industry and in no way reflect our beliefs or attitudes towards historical events or peoples.
+
+These terms are purely technical and do not carry any implications beyond their technical meanings.  
+
