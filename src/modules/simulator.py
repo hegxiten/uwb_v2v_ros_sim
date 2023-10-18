@@ -65,7 +65,6 @@ class Simulator:
                     rospy.loginfo(f"Robot {self.robot_idx} is too close to another robot")
                     kill_gazebo()
                     shutdown_ros_node()
-                    kill_ros_master()
                     time.sleep(2)
 
 

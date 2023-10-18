@@ -17,7 +17,7 @@ from utils.utils import kill_gazebo, shutdown_ros_node, kill_ros_master
 
 REPETITION = 5
 MAX_RANGE_UNIT = 50  # meters
-MAX_RANGES = [MAX_RANGE_UNIT * i for i in range(5)]  # meters
+MAX_RANGES = [MAX_RANGE_UNIT * i for i in range(1, 5)]  # meters
 
 if __name__ == '__main__':
     # set up logging to file
@@ -25,6 +25,8 @@ if __name__ == '__main__':
     movement_direction = -1
     kill_on_end = 1
     for uwb_range in MAX_RANGES:
+        if uwb_range == 50:
+            continue
         robot_spacing = uwb_range + 20
         robot_spacing = max(robot_spacing, VEHICLE_LENGTH + MINIMUM_DISTANCE)
         speeds = [i for i in range(80, 0, -1)]  # m/s
@@ -57,7 +59,6 @@ if __name__ == '__main__':
                     )
                     kill_gazebo()
                     shutdown_ros_node()
-                    kill_ros_master()
                     time.sleep(1)
                     print(
                         f"------------[FINISHED] REPETITION: {cnt} for speed: {speed} range: {uwb_range}-----------------")
@@ -65,8 +66,8 @@ if __name__ == '__main__':
                     print(f"Timeout expired for speed: {speed} at repetition: {cnt}")
                     kill_gazebo()
                     shutdown_ros_node()
-                    kill_ros_master()
                     print(
                         f"------------[TIMED OUT] REPETITION: {cnt} for speed: {speed} range: {uwb_range}-----------------")
                     continue
             cnt += 1
+    kill_ros_master()
