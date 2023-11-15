@@ -6,10 +6,21 @@ This package is to simulate the self-propelled rail vehicle V2V ranging function
 
 ## Positions of the UWB anchors (slaves) and tags (masters)
 
-The position of the individual UWB nodes are defined as the "Informative Position" (details can be found at the submitted manuscript **Development and Testing of A UWB-based Vehicle-toVehicle (V2V) Ranging System for Self-Propelled Rail
-Vehicles** submitted to *IEEE Transactions on Vehicular Technology*)
+The position of the individual UWB nodes is defined as the "Informative Position".
 
 To define the informative positions of individual UWB nodes, change the `joint_origin` argument for each `xacro:uwb_link` in `rail_vehicle_description/model.urdf.xacro`.
+
+Details can be found in **[Development and Testing of A UWB-based Vehicle-toVehicle (V2V) Ranging System for Self-Propelled Rail Vehicles](https://doi.org/10.1109/TVT.2023.3327727)** on *IEEE Transactions on Vehicular Technology*
+
+```
+@article{wang2023development,
+  title={Development and Testing of a UWB-based Vehicle-to-Vehicle (V2V) Ranging System for Self-Propelled Rail Vehicles},
+  author={Wang, Zezhou and Spasojevic, Predrag and Schlake, Bryan W and Mulay, Ninad and Zaman, Asim F and Liu, Xiang},
+  journal={IEEE Transactions on Vehicular Technology},
+  year={2023},
+  publisher={IEEE}
+}
+```
 
 ## Platform and environments
 `lsb_release -a` outputs:
